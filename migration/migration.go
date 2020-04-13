@@ -1,8 +1,8 @@
 package migration
 
 import (
-	"github.com/JamesACM/jwt_api_base/configuration"
-	"github.com/JamesACM/jwt_api_base/models"
+	"github.com/JamesAndresCM/jwt_api_base/configuration"
+	"github.com/JamesAndresCM/jwt_api_base/models"
 )
 
 func Migrate() {
