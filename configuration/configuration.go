@@ -37,7 +37,6 @@ func GetConfiguration() Configuration {
 
 func GetConnection() *gorm.DB {
 	c := GetConfiguration()
-	fmt.Println(c)
 	psqlInfo := fmt.Sprintf("host=%s port=%s user=%s "+
 		"dbname=%s password=%s sslmode=disable",
 		c.Host, c.Port, c.User, c.Database, c.Password)
