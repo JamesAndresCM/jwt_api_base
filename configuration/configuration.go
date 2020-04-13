@@ -7,7 +7,7 @@ import (
 	"os"
 
 	"github.com/jinzhu/gorm"
-	_ "github.com/lib/pq"
+	_ "github.com/jinzhu/gorm/dialects/postgres"
 )
 
 type Configuration struct {
@@ -37,9 +37,8 @@ func GetConfiguration() Configuration {
 
 func GetConnection() *gorm.DB {
 	c := GetConfiguration()
-	psqlInfo := fmt.Sprintf("host=%s port=%s user=%s "+
-		"password=%s dbname=%s sslmode=disable",
-		c.Host, c.Port, c.User, c.Password, c.Database)
+	psqlInfo := fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable password=%s",
+		c.Host, c.Port, c.User, c.Database, c.Password)
 	db, err := gorm.Open("postgres", psqlInfo)
 
 	if err != nil {
