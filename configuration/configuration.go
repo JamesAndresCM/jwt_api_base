@@ -10,7 +10,7 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 )
 
-type Configuration struct {
+type configuration struct {
 	Host     string
 	Port     string
 	User     string
@@ -18,8 +18,8 @@ type Configuration struct {
 	Database string
 }
 
-func GetConfiguration() Configuration {
-	var c Configuration
+func getConfiguration() configuration {
+	var c configuration
 	file, err := os.Open("./config.json")
 	if err != nil {
 		log.Fatal(err)
@@ -36,7 +36,7 @@ func GetConfiguration() Configuration {
 }
 
 func GetConnection() *gorm.DB {
-	c := GetConfiguration()
+	c := getConfiguration()
 	psqlInfo := fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable password=%s",
 		c.Host, c.Port, c.User, c.Database, c.Password)
 	db, err := gorm.Open("postgres", psqlInfo)
