@@ -37,11 +37,11 @@ func GetConfiguration() Configuration {
 
 func GetConnection() *gorm.DB {
 	c := GetConfiguration()
-	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
-		"password=%s dbname=%s sslmode=disable",
-		c.Host, c.Port, c.User, c.Password, c.Database)
-	fmt.Println(psqlInfo)
-	db, err := gorm.Open("jwt_api_base", psqlInfo)
+	fmt.Println(c)
+	psqlInfo := fmt.Sprintf("host=%s port=%s user=%s "+
+		"dbname=%s password=%s sslmode=disable",
+		c.Host, c.Port, c.User, c.Database, c.Password)
+	db, err := gorm.Open("postgres", psqlInfo)
 
 	if err != nil {
 		log.Fatal(err)
