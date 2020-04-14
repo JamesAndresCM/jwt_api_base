@@ -19,7 +19,7 @@ type database struct {
 }
 
 func getConfiguration() database {
-	var c database
+	var db database
 	file, err := os.Open("./.env")
 	if err != nil {
 		log.Fatal(err)
@@ -27,18 +27,17 @@ func getConfiguration() database {
 	defer file.Close()
 
 	gotenv.Load()
-	fmt.Println(file)
-	c.Database = os.Getenv("DB_NAME")
-	c.Password = os.Getenv("DB_PASS")
-	c.Host = os.Getenv("DB_HOST")
-	c.Port = os.Getenv("DB_PORT")
-	c.User = os.Getenv("DB_USER")
+	db.Database = os.Getenv("DB_NAME")
+	db.Password = os.Getenv("DB_PASS")
+	db.Host = os.Getenv("DB_HOST")
+	db.Port = os.Getenv("DB_PORT")
+	db.User = os.Getenv("DB_USER")
 
-	if c.Database == "" || c.Password == "" || c.Host == "" || c.Port == "" || c.User == "" {
+	if db.Database == "" || db.Password == "" || db.Host == "" || db.Port == "" || db.User == "" {
 		log.Fatal("env vars not defined")
 	}
 
-	return c
+	return db
 }
 
 func GetConnection() *gorm.DB {
