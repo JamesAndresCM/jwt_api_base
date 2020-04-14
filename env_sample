@@ -1,0 +1,5 @@
+DB_PORT=5432
+DB_HOST=localhost
+DB_NAME=jwt_api_base
+DB_PASS=xxx
+DB_USER=postgres
