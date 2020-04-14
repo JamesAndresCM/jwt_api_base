@@ -34,7 +34,6 @@ func getConfiguration() database {
 	c.Port = os.Getenv("DB_PORT")
 	c.User = os.Getenv("DB_USER")
 
-	fmt.Println(c.Database, c.Password, c.Host, c.Port, c.User)
 	if c.Database == "" || c.Password == "" || c.Host == "" || c.Port == "" || c.User == "" {
 		log.Fatal("env vars not defined")
 	}
