@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/JamesAndresCM/jwt_api_base/lib"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/subosito/gotenv"
@@ -21,9 +22,7 @@ type database struct {
 func getConfiguration() database {
 	var db database
 	file, err := os.Open("./.env")
-	if err != nil {
-		log.Fatal(err)
-	}
+	lib.Fatal(err)
 	defer file.Close()
 
 	gotenv.Load()
@@ -46,10 +45,7 @@ func GetConnection() *gorm.DB {
 	psqlInfo := fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable password=%s",
 		c.Host, c.Port, c.User, c.Database, c.Password)
 	db, err := gorm.Open("postgres", psqlInfo)
-
-	if err != nil {
-		log.Fatal(err)
-	}
+	lib.Fatal(err)
 
 	return db
 }
