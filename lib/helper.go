@@ -2,7 +2,7 @@ package lib
 
 import "log"
 
-func fatal(err error) {
+func Fatal(err error) {
 	if err != nil {
 		log.Fatal(err)
 	}
