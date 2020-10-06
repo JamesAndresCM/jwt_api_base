@@ -3,7 +3,6 @@ package controllers
 import (
 	"crypto/md5"
 	"crypto/sha256"
-	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -27,7 +26,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	defer db.Close()
 
 	c := sha256.Sum256([]byte(user.Password))
-	pwd := base64.URLEncoding.EncodeToString(c[:32])
+	pwd := fmt.Sprintf("%x", c)
 
 	db.Where("email = (?) AND password = (?)", user.Email, pwd).First(&user)
 
@@ -50,7 +49,6 @@ func Login(w http.ResponseWriter, r *http.Request) {
 func UserCreate(w http.ResponseWriter, r *http.Request) {
 	user := models.User{}
 	m := models.Message{}
-
 	err := json.NewDecoder(r.Body).Decode(&user)
 	if err != nil {
 		m.Message = fmt.Sprintf("Error user is wrong %s", err)
