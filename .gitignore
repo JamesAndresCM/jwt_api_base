@@ -1,3 +1,2 @@
 .env
 run_migration
-keys/*
